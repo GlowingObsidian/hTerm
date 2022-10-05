@@ -1,0 +1,26 @@
+.console
+{
+    font-family: 'Source Code Pro', monospace;
+    margin-top: 50px;
+    background-color: black;
+    color: greenyellow;
+    width: 640px;
+    height: 480px;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 18px;
+}
+
+#command
+{
+    width: 90%;
+    background-color: black;
+    border: none;
+    color: yellowgreen;
+}
+
+#command:focus
+{
+    outline: none;
+}
