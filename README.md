@@ -11,7 +11,7 @@ Useable functions:
 
 `clear()` : clears the termninal
 
-To add a new termninal , follow the steps.
+To add a new termninal move the `terminal.js` and `terminal_style.css` files to the work folder then follow the steps.
 
 Step 1:  Add a console div in your `index.html` file. Example: `<div class="console" id="console"></div>`
 
