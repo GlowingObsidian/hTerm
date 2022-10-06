@@ -31,25 +31,30 @@ The follow example shows a simple parsing function, it can be modified however r
 
 ```
 function parseCommand() {
-  command = document.getElementById("command").value;
-  con.log("$ " + command);
-  command = command.split(" ");
-  if (command[0] === "hello") {
-    term.log("Hello, World");
-  } 
-  else if (command[0] === "echo") {
-    term.log(command[1])
+    command = document.getElementById("command").value;
+    term.log("$ " + command);
+    command = command.split(" ");
+    if (command[0] === "echo") {
+      buff=""
+      for(let i=1;i<command.length;i++)
+      {
+        buff+=command[i]+" "
+      }
+      term.log(buff)
+    }
+    else if(command[0]==="add")
+    {
+        term.log(Number(command[1])+Number(command[2]))
+    }
+    else if(command[0] === "clear") {
+      term.clear()
+    }
+    else
+    {
+      term.log("'"+command[0]+"' is not a valid command.<br>")
+    }
   }
-  else if(command[0] === "clear") {
-    term.clear()
-  }
-  else
-  {
-    term.log("'"+command[0]+"' is not a valid command.<br>")
-  }
-}
 ```
-
 **NOTE THAT THE FUNCTION NAME HAS TO BE parseCommand()**
 
-![image](https://user-images.githubusercontent.com/36966603/194103481-5e517394-cb29-4a0a-ade9-8ee05a6a333d.png)
+![Screenshot 2022-10-06 110227](https://user-images.githubusercontent.com/36966603/194222213-436c28fd-0402-4333-b881-8a2644dde337.png)
