@@ -24,7 +24,7 @@ function terminal(id) {
 
   this.init = function () {
     document.getElementById(id).innerHTML =
-      '<p style="text-align: center;">-: VLL Console v2.0 :-</p>';
+      '<p style="text-align: center;">-: hTerm Console v2.2 :-</p>';
     document.getElementById(id).innerHTML +=
       '<br>$&nbsp;<input type="text" id="command">';
 

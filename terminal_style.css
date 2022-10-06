@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
 .console
 {
     font-family: 'Source Code Pro', monospace;
-    margin-top: 50px;
+    margin-top: 10px;
     background-color: black;
     color: greenyellow;
     width: 640px;
@@ -12,16 +14,14 @@
     font-size: 18px;
 }
 
-#command
+#command,#command:focus
 {
+    font-family: 'Source Code Pro', monospace;
     width: 90%;
     background-color: black;
     border: none;
     color: yellowgreen;
+    font-size: 18px;
+    outline: none;
 }
 
-#command:focus
-{
-    outline: none;
-    color: greenyellow;
-}
