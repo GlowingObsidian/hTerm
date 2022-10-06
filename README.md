@@ -25,13 +25,15 @@ Step 5:  In the main.js also add `term.init()`
 
 As of now , it will work perfectly as an output-only termninal 
 
-To use it as an input-output termninal a predefined `parseOutput` function has to be added to the `main.js`
+To use it as an input-output termninal a predefined `parseCommand()` function has to be added to the `main.js`
 
 The follow example shows a simple parsing function, it can be modified however required.
 
 ```
 function parseCommand() {
-  command = document.getElementById("command").value.split(' ');
+  command = document.getElementById("command").value;
+  con.log("$ " + command);
+  command = command.split(" ");
   if (command[0] === "hello") {
     term.log("Hello, World");
   } 
@@ -48,6 +50,6 @@ function parseCommand() {
 }
 ```
 
-**NOTE THAT THE FUNCTION NAME HAS TO BE parseOutput()**
+**NOTE THAT THE FUNCTION NAME HAS TO BE parseCommand()**
 
 ![image](https://user-images.githubusercontent.com/36966603/194103481-5e517394-cb29-4a0a-ade9-8ee05a6a333d.png)
