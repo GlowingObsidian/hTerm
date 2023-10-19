@@ -1,27 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
-.console
-{
-    font-family: 'Source Code Pro', monospace;
-    margin-top: 10px;
-    background-color: black;
-    color: greenyellow;
-    width: 640px;
-    height: 480px;
-    border-radius: 10px;
-    padding: 10px;
-    overflow-y: auto;
-    font-size: 18px;
+#terminal {
+  font-family: "Source Code Pro", monospace;
+  margin-top: 10px;
+  width: 768px;
+  height: 500px;
+  background-color: black;
+  color: greenyellow;
+  border-radius: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 16px;
 }
 
-#command,#command:focus
-{
-    font-family: 'Source Code Pro', monospace;
-    width: 90%;
-    background-color: black;
-    border: none;
-    color: yellowgreen;
-    font-size: 18px;
-    outline: none;
+#command,
+#command:focus {
+  font-family: "Source Code Pro", monospace;
+  width: 90%;
+  background-color: black;
+  border: none;
+  color: greenyellow;
+  font-size: 16px;
+  outline: none;
 }
-
