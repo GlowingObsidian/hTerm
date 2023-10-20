@@ -1,16 +1,20 @@
-var promptEnabled = false;
-var terminalName = "";
-var promptSymbol = "$";
-
-const getTerminal = () => {
-  return document.getElementById("terminal");
+const terminal = {
+  object: document.getElementById("terminal"),
+  availableCommands: [],
+  issuedCommands: 0,
+  promptEnabled: false,
+  name: "hTerm",
+  symbol: "$",
+  version: "3.1",
+  author: "Shreyan Dey",
+  copyright: "2023",
 };
 
-const setTerminalName = (name) => (terminalName = name);
+const setTerminalName = (name) => (terminal.name = name);
 
 const getLines = () => {
-  lines = getTerminal()
-    .innerHTML.replaceAll("<span>", "")
+  lines = terminal.object.innerHTML
+    .replaceAll("<span>", "")
     .replaceAll("<br>", "")
     .split("</span>");
   lines.pop();
@@ -21,9 +25,9 @@ const makeLine = (line) => {
   return line ? `<span>${line}</span><br>` : null;
 };
 
-const updateState = (newState = null) => {
-  getTerminal().innerHTML = removePrompt() + (newState ? newState : "");
-  if (promptEnabled) {
+const updateState = (newState = "") => {
+  terminal.object.innerHTML = removePrompt() + newState;
+  if (terminal.promptEnabled) {
     prompt();
   }
 };
@@ -33,31 +37,32 @@ const log = (line) => {
 };
 
 const clear = () => {
-  getTerminal().innerHTML = "";
+  terminal.object.innerHTML = "";
   updateState();
 };
 
 const setPrompt = (value) => {
-  promptEnabled = value;
-  if (promptEnabled) {
-    getTerminal().addEventListener("click", () => {
+  terminal.promptEnabled = value;
+  updateState();
+  if (terminal.promptEnabled) {
+    terminal.object.addEventListener("click", () => {
       document.getElementById("command").focus();
     });
   }
-  updateState();
 };
 
-const setPromptSymbol = (symbol) => {
-  promptSymbol = symbol;
-  clear();
-  updateState();
+const setPromptSymbol = (symbol = "") => {
+  if (terminal.promptEnabled && symbol != "") {
+    terminal.object.innerHTML = removePrompt();
+    terminal.symbol = symbol;
+    prompt();
+  }
 };
 
 const removePrompt = () => {
-  return getTerminal().innerHTML.replace(
-    `<br><span>${promptSymbol} <input type="text" name="" id="command" autocomplete="off"></span><br>`,
-    ""
-  );
+  promptMarkup = `<br><span>${terminal.symbol} <input type="text" id="command" autocomplete="off"></span><br>`;
+
+  return terminal.object.innerHTML.replace(promptMarkup, "");
 };
 
 const commandList = {
@@ -66,10 +71,13 @@ const commandList = {
   lastCmdInProgress: "",
 };
 
-const iscommandListEmpty = () => (commandList["idx"] === -1 ? true : false);
+const iscommandListEmpty = () => (commandList.idx === -1 ? true : false);
 
 const prompt = () => {
-  getTerminal().innerHTML += `<br><span>${promptSymbol} <input type="text" name="" id="command" autocomplete="off" /></span><br>`;
+  if (!terminal.promptEnabled) {
+    return;
+  }
+  terminal.object.innerHTML += `<br><span>${terminal.symbol} <input type="text" id="command" autocomplete="off" /></span><br>`;
   const input = document.getElementById("command");
 
   input.focus();
@@ -82,7 +90,7 @@ const prompt = () => {
         commandList.cmds.push(command);
         commandList.idx = commandList.cmds.length;
         commandList.lastCmdInProgress = "";
-        log(`<br>${promptSymbol} ${command}`);
+        log(`<br>${terminal.symbol} ${command}`);
         parseCommand(command);
       }
     } else if (event.key === "ArrowUp") {
@@ -119,17 +127,19 @@ commands = {};
 
 const addCommand = (command, resolution) => {
   commands[command] = resolution;
+  terminal.availableCommands.push(command);
 };
 
 const parseCommand = (command) => {
   command = command.split(" ");
   try {
     commands[command[0]](command.slice(1));
+    terminal.issuedCommands += 1;
   } catch (err) {
     console.log(err);
     if (err.name === "TypeError") {
       log(
-        `${terminalName === "" ? "hTerm" : terminalName}: '${
+        `${terminal.name === "" ? "hTerm" : terminal.name}: '${
           command[0]
         }' not recognized as a valid command.`
       );
