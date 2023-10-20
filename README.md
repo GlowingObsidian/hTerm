@@ -23,17 +23,32 @@
 
 - Callback function:
 
-```
-function print(args){
-    args = args.join(' ');
-    log(args);
-}
-```
+  - ```
+    function print(args){
+      args = args.join(' ');
+      log(args);
+    }
+    ```
 
 - New command:
   `addCommand('print', print)`
 
-#### Updates in v3.0:
+### Updates in v3.1:
+
+- Fix `setPromptSymbol()` to change the symbol on the go without cleaning the entire window.
+- Add terminal object with the following keys:
+  - `object` : Store the DOM terminal object.
+  - `availableCommands` : Array of currently executable commands.
+  - `issuedCommands` : Number of valid commands executed so far.
+  - `promptEnabled` : Stores whether prompt is enabled.
+  - `name` : Stores the name of Terminal.
+  - `symbol` : Stores the prompt symbol.
+  - `version` : Current hTerm version.
+  - `author` : Stores the author name.
+  - `copyright` : Stores the year.
+- bug fixes.
+
+### Updates in v3.0:
 
 - API completely updated.
 - Terminal object can be easily accessed to apply all the DOM attributes.
